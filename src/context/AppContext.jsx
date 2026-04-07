@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import {
   mockBudgets,
   mockExpenses,
@@ -18,6 +18,30 @@ export const AppProvider = ({ children }) => {
   const [history, setHistory] = useState(mockHistory);
   const [settlements, setSettlements] = useState(mockSettlements);
   const [tripLocked, setTripLocked] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = typeof window !== 'undefined' ? window.localStorage.getItem('tems-theme') : null;
+
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      return savedTheme;
+    }
+
+    const prefersDark = typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.dataset.theme = theme;
+    }
+
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('tems-theme', theme);
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((current) => (current === 'light' ? 'dark' : 'light'));
+  };
 
   const addHistoryEvent = (event, details, actor = 'You') => {
     setHistory((prev) => [
@@ -47,9 +71,12 @@ export const AppProvider = ({ children }) => {
       settlements,
       setSettlements,
       tripLocked,
-      setTripLocked
+      setTripLocked,
+      theme,
+      setTheme,
+      toggleTheme
     }),
-    [groups, expenses, budgets, notifications, history, settlements, tripLocked]
+    [groups, expenses, budgets, notifications, history, settlements, tripLocked, theme]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

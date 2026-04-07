@@ -16,6 +16,7 @@ export const STATUS_COLORS = {
   PENDING: 'var(--warning-600)',
   APPROVED: 'var(--success-600)',
   DISPUTED: 'var(--danger-600)',
+  OBJECTED: 'var(--danger-600)',
   PAID: 'var(--brand-700)'
 };
 
@@ -75,7 +76,9 @@ export const mockExpenses = [
     amount: 4300,
     payer: 'Ishita',
     category: 'Other',
-    status: 'DISPUTED',
+    status: 'OBJECTED',
+    objectionReason: 'Need the purchase bill and vendor quote before approval.',
+    objectionRaisedAt: '2026-04-03T15:00:00',
     createdAt: '2026-04-03T14:20:00',
     objectionWindowHours: 24
   }
@@ -140,7 +143,34 @@ export const mockHistory = [
 ];
 
 export const mockSettlements = [
-  { id: 1, from: 'Riya', to: 'Keshav', amount: 8400, status: 'PENDING' },
-  { id: 2, from: 'Akhil', to: 'Keshav', amount: 5200, status: 'PENDING' },
-  { id: 3, from: 'Manoj', to: 'Ishita', amount: 2150, status: 'PAID' }
+  {
+    id: 1,
+    teamName: 'Goa 2026 Trip',
+    expenseId: 1,
+    expenseTitle: 'Resort Booking Advance',
+    from: 'Riya',
+    to: 'Keshav',
+    amount: 8400,
+    status: 'PENDING'
+  },
+  {
+    id: 2,
+    teamName: 'Goa 2026 Trip',
+    expenseId: 1,
+    expenseTitle: 'Resort Booking Advance',
+    from: 'Akhil',
+    to: 'Keshav',
+    amount: 5200,
+    status: 'PENDING'
+  },
+  {
+    id: 3,
+    teamName: 'Final Year Project Team',
+    expenseId: 3,
+    expenseTitle: 'Prototype Materials',
+    from: 'Manoj',
+    to: 'Ishita',
+    amount: 2150,
+    status: 'PAID'
+  }
 ];

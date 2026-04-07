@@ -8,6 +8,8 @@ const SettlementTable = ({ rows, onMarkPaid, disabled }) => {
         <table>
           <thead>
             <tr>
+              <th>Team</th>
+              <th>Expense</th>
               <th>From</th>
               <th>To</th>
               <th>Amount</th>
@@ -18,6 +20,8 @@ const SettlementTable = ({ rows, onMarkPaid, disabled }) => {
           <tbody>
             {rows.map((item) => (
               <tr key={item.id}>
+                <td>{item.teamName || '-'}</td>
+                <td>{item.expenseTitle || `Expense #${item.expenseId}`}</td>
                 <td>{item.from}</td>
                 <td>{item.to}</td>
                 <td>{formatCurrency(item.amount)}</td>

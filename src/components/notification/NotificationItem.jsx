@@ -1,9 +1,9 @@
 import { formatDateTime } from '../../utils/dateUtils';
 
 const stylesByType = {
-  approval: { background: '#e4f3fb', border: '#c7e6f6' },
-  budget: { background: '#fff1df', border: '#f4d8b4' },
-  reminder: { background: '#edf8f1', border: '#cdebd8' }
+  approval: { background: 'var(--brand-100)', border: 'var(--brand-500)' },
+  budget: { background: 'var(--accent-100)', border: 'var(--accent-700)' },
+  reminder: { background: 'color-mix(in srgb, var(--success-600) 12%, var(--bg-surface))', border: 'var(--success-600)' }
 };
 
 const NotificationItem = ({ notification, onToggleRead }) => {

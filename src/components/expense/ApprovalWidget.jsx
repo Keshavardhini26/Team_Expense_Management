@@ -1,12 +1,12 @@
 import { hoursLeftForApproval } from '../../utils/dateUtils';
 
-const ApprovalWidget = ({ expenses, onUpdateStatus }) => {
+const ApprovalWidget = ({ expenses, onUpdateStatus, onRaiseObjection }) => {
   const pending = expenses.filter((item) => item.status === 'PENDING');
 
   return (
     <section className="content-card panel-pad">
       <div className="panel-head">
-        <h3>Approval Center</h3>
+        <h3>Pending Expenses</h3>
         <span className="badge">{pending.length} pending</span>
       </div>
 
@@ -26,7 +26,7 @@ const ApprovalWidget = ({ expenses, onUpdateStatus }) => {
               </button>
               <button
                 className="btn btn-muted"
-                onClick={() => onUpdateStatus(expense.id, 'DISPUTED')}
+                onClick={() => onRaiseObjection(expense)}
               >
                 Raise Objection
               </button>

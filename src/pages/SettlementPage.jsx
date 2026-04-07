@@ -26,7 +26,7 @@ const SettlementPage = () => {
           Activate Trip Lock
         </button>
       </div>
-      <div className="grid-two">
+      <div className="settlement-layout">
         <SettlementSummary rows={settlements} tripLocked={tripLocked} />
         <SettlementTable rows={settlements} onMarkPaid={markPaid} disabled={tripLocked} />
       </div>
