@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BUDGET_CATEGORIES } from '../../utils/constants';
 
-const ExpenseForm = ({ onAddExpense, disabled }) => {
+const ExpenseForm = ({ onAddExpense, disabled, creatorName }) => {
   const [form, setForm] = useState({
     title: '',
     amount: '',
@@ -20,6 +20,7 @@ const ExpenseForm = ({ onAddExpense, disabled }) => {
       ...form,
       id: Date.now(),
       amount: Number(form.amount),
+      createdBy: creatorName || form.payer,
       status: 'PENDING',
       createdAt: new Date().toISOString(),
       objectionWindowHours: 24

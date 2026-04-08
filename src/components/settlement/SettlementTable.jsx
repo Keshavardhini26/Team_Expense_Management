@@ -1,6 +1,6 @@
 import formatCurrency from '../../utils/formatCurrency';
 
-const SettlementTable = ({ rows, onMarkPaid, disabled }) => {
+const SettlementTable = ({ rows, onMarkPaid, onDownloadReceipt, disabled }) => {
   return (
     <section className="content-card panel-pad">
       <h3>Optimized Settlements</h3>
@@ -27,13 +27,23 @@ const SettlementTable = ({ rows, onMarkPaid, disabled }) => {
                 <td>{formatCurrency(item.amount)}</td>
                 <td>{item.status}</td>
                 <td>
-                  <button
-                    className="btn btn-muted"
-                    disabled={disabled || item.status === 'PAID'}
-                    onClick={() => onMarkPaid(item.id)}
-                  >
-                    Mark Paid
-                  </button>
+                  <div className="row-gap">
+                    <button
+                      className="btn btn-muted"
+                      disabled={disabled || item.status === 'PAID'}
+                      onClick={() => onMarkPaid(item.id)}
+                    >
+                      Mark Paid
+                    </button>
+                    <button
+                      className="btn btn-primary"
+                      disabled={item.status !== 'PAID'}
+                      onClick={() => onDownloadReceipt(item)}
+                      title={item.status !== 'PAID' ? 'Mark this settlement as paid to download receipt' : 'Download receipt'}
+                    >
+                      Download Receipt
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
